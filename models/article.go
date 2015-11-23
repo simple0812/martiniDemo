@@ -1,8 +1,12 @@
 package models
 
 type Article struct {
+	ID        int    `json:"id"`
 	Title     string `json:"title"`
 	Content   string `json:"content"`
 	Status    int    `json:"status"`
-	CreatedAt string `json:"created_at"`
+	UserId    int    `json:"userId" sql:"foreignkey:user(id)"`
+	CreatedAt string `json:"createdAt"`
+
+	Comments []Comment
 }

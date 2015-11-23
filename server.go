@@ -2,6 +2,7 @@ package main
 
 import (
 	"martiniDemo/app"
+	_ "martiniDemo/models"
 	_ "martiniDemo/routers"
 	"net/http"
 	_ "net/http/pprof"
@@ -13,11 +14,6 @@ const (
 	Test string = "test"
 )
 
-type UserInfo struct {
-	Name string `json:"name"`
-	Age  int    `json:"age"`
-}
-
 func main() {
 
 	app.Instance.NotFound(func() string {
@@ -26,5 +22,5 @@ func main() {
 
 	http.ListenAndServe(":3003", app.Instance)
 
-	app.Instance.Run()
+	go app.Instance.Run()
 }

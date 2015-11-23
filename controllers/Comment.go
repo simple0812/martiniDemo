@@ -6,12 +6,15 @@ import (
 	"martiniDemo/utils"
 	"net/http"
 	"time"
+
+	"github.com/martini-contrib/render"
 )
 
-type ArticleController struct {
+type CommentController struct {
 }
 
-func (ArticleController) Create(req *http.Request, res http.ResponseWriter) string {
+
+func (CommentController) Create(req *http.Request, res http.ResponseWriter) string {
 	fmt.Println("create")
 	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")
@@ -32,7 +35,7 @@ func (ArticleController) Create(req *http.Request, res http.ResponseWriter) stri
 	return p
 }
 
-func (ArticleController) Update(req *http.Request, res http.ResponseWriter) string {
+func (CommentController) Update(req *http.Request, res http.ResponseWriter) string {
 	fmt.Println("Update")
 	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")
@@ -44,7 +47,7 @@ func (ArticleController) Update(req *http.Request, res http.ResponseWriter) stri
 	return p
 }
 
-func (ArticleController) Remove(req *http.Request, res http.ResponseWriter) string {
+func (CommentController) Remove(req *http.Request, res http.ResponseWriter) string {
 	fmt.Println("Remove")
 	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")
@@ -56,7 +59,7 @@ func (ArticleController) Remove(req *http.Request, res http.ResponseWriter) stri
 	return p
 }
 
-func (ArticleController) GetList(req *http.Request, res http.ResponseWriter) string {
+func (CommentController) GetList(req *http.Request, res http.ResponseWriter) string {
 	fmt.Println("GetList")
 	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")

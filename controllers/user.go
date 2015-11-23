@@ -1,16 +1,39 @@
 package controllers
 
 import (
-	"beegoDemo/utils"
+	"fmt"
+	"martiniDemo/models"
+	"martiniDemo/utils"
 	"net/http"
-
-	"github.com/martini-contrib/render"
+	"time"
 )
 
 type UserController struct {
 }
 
-func (UserController) Foo(req *http.Request, res http.ResponseWriter) string {
+func (UserController) Create(req *http.Request, res http.ResponseWriter) string {
+	fmt.Println("create")
+	val := req.FormValue("key")
+	res.Header().Set("Content-Type", "application/json")
+	p, _ := utils.GetSucessResult(struct {
+		Name string
+		Age  int
+	}{val, 18})
+
+	user := models.User{
+		Name:      "zhanglei",
+		Nick:      val,
+		Age:       1,
+		CreatedAt: int(time.Now().Unix()),
+	}
+
+	models.DB.Create(&user)
+
+	return p
+}
+
+func (UserController) Update(req *http.Request, res http.ResponseWriter) string {
+	fmt.Println("Update")
 	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")
 	p, _ := utils.GetSucessResult(struct {
@@ -21,7 +44,26 @@ func (UserController) Foo(req *http.Request, res http.ResponseWriter) string {
 	return p
 }
 
-func (UserController) Bar(req *http.Request, res http.ResponseWriter, r render.Render) {
-	var values map[string]string = map[string]string{"key": "xxxx"}
-	r.HTML(200, "test", values)
+func (UserController) Remove(req *http.Request, res http.ResponseWriter) string {
+	fmt.Println("Remove")
+	val := req.FormValue("key")
+	res.Header().Set("Content-Type", "application/json")
+	p, _ := utils.GetSucessResult(struct {
+		Name string
+		Age  int
+	}{val, 18})
+
+	return p
+}
+
+func (UserController) GetList(req *http.Request, res http.ResponseWriter) string {
+	fmt.Println("GetList")
+	val := req.FormValue("key")
+	res.Header().Set("Content-Type", "application/json")
+	p, _ := utils.GetSucessResult(struct {
+		Name string
+		Age  int
+	}{val, 18})
+
+	return p
 }
