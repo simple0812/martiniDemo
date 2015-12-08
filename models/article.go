@@ -8,5 +8,5 @@ type Article struct {
 	UserId    int    `json:"userId" sql:"foreignkey:user(id)"`
 	CreatedAt string `json:"createdAt"`
 
-	Comments []Comment
+	Comments []Comment `json:"_"`
 }

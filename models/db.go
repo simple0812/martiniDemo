@@ -26,10 +26,10 @@ func init() {
 	DB.DB().SetMaxOpenConns(200)
 	DB.SingularTable(true)
 
-	DB.AutoMigrate(&User{}, &Article{}, &Comment{})
+	// DB.AutoMigrate(&User{}, &Article{}, &Comment{})
 
-	DB.Model(&Article{}).AddForeignKey("user_id", "user(id)", "RESTRICT", "RESTRICT")
-	DB.Model(&Comment{}).AddForeignKey("user_id", "user(id)", "RESTRICT", "RESTRICT")
-	DB.Model(&Comment{}).AddForeignKey("article_id", "article(id)", "RESTRICT", "RESTRICT")
+	// DB.Model(&Article{}).AddForeignKey("user_id", "user(id)", "RESTRICT", "RESTRICT")
+	// DB.Model(&Comment{}).AddForeignKey("user_id", "user(id)", "RESTRICT", "RESTRICT")
+	// DB.Model(&Comment{}).AddForeignKey("article_id", "article(id)", "RESTRICT", "RESTRICT")
 
 }

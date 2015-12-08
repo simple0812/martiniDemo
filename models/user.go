@@ -7,6 +7,6 @@ type User struct {
 	Age       int    `json:"age"`
 	CreatedAt int    `json:"createdAt"`
 
-	Articles []Article
-	Comments []Comment
+	Articles []Article `json:"_"`
+	Comments []Comment `json:"_"`
 }

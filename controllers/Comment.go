@@ -6,13 +6,10 @@ import (
 	"martiniDemo/utils"
 	"net/http"
 	"time"
-
-	"github.com/martini-contrib/render"
 )
 
 type CommentController struct {
 }
-
 
 func (CommentController) Create(req *http.Request, res http.ResponseWriter) string {
 	fmt.Println("create")

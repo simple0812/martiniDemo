@@ -1,45 +1,42 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"martiniDemo/models"
 	"martiniDemo/utils"
 	"net/http"
-	"time"
 )
 
 type UserController struct {
 }
 
 func (UserController) Create(req *http.Request, res http.ResponseWriter) string {
-	fmt.Println("create")
-	val := req.FormValue("key")
-	res.Header().Set("Content-Type", "application/json")
-	p, _ := utils.GetSucessResult(struct {
-		Name string
-		Age  int
-	}{val, 18})
+	result, _ := ioutil.ReadAll(req.Body)
+	defer req.Body.Close()
 
-	user := models.User{
-		Name:      "zhanglei",
-		Nick:      val,
-		Age:       1,
-		CreatedAt: int(time.Now().Unix()),
+	var user models.User
+	json.Unmarshal(result, &user)
+
+	if user.Name == "" || user.Nick == "" {
+		return utils.GetFailResult("name or nick is empty")
 	}
 
+	user.ID = 0
 	models.DB.Create(&user)
 
-	return p
+	r, _ := utils.GetSucessResult(user)
+
+	return r
 }
 
 func (UserController) Update(req *http.Request, res http.ResponseWriter) string {
-	fmt.Println("Update")
-	val := req.FormValue("key")
 	res.Header().Set("Content-Type", "application/json")
 	p, _ := utils.GetSucessResult(struct {
 		Name string
 		Age  int
-	}{val, 18})
+	}{"val", 18})
 
 	return p
 }
